@@ -25,7 +25,4 @@ fi
 
 export BUILD_ID=dontKillMe
 
-nohup java -jar "$DEPLOY_DIR/$JAR_NAME" \
-  --spring.profiles.active=prod \
-  --spring.config.additional-location="$SECRET_FILE" \
-  > "$DEPLOY_DIR/app.log" 2>&1 &
+nohup java -jar "$DEPLOY_DIR/$JAR_NAME" --spring.profiles.active=prod --spring.config.additional-location="$SECRET_FILE" > "$DEPLOY_DIR/app.log" 2>&1 &
