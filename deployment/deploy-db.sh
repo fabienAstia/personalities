@@ -9,7 +9,7 @@ if [ -e "$DESTINATION" ]; then
 fi
 
 mkdir -p "$DESTINATION"/Scripts
-cp -r /home/jenkins/agent1/workspace/personalities-db-deployment/Scripts/* \
+cp -r /var/lib/jenkins/agent1/workspace/personalities-db-deployment/Scripts/* \
 "$DESTINATION"/Scripts/
 cd "$DESTINATION"/Scripts/
 
