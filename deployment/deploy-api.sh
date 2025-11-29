@@ -2,7 +2,7 @@
 set -e
 set -x
 JAR_NAME="personalities-business-0.0.1-SNAPSHOT.jar"
-JAR_PATH="/home/jenkinsagent/agent1/workspace/personalities-api-deployment/personalities-business/target"
+JAR_PATH="/home/jenkins/agent1/workspace/personalities-api-deployment/personalities-business/target"
 DEPLOY_DIR="/srv/fabien-astiasaran/personalities/personalities-api-deployment"
 SECRET_FILE="/etc/personalities/secret.properties"
 
