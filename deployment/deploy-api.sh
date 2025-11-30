@@ -6,7 +6,7 @@ JAR_PATH="/var/lib/jenkins/agent1/workspace/personalities_CD_pipe/personalities-
 DEPLOY_DIR="/srv/fabien-astiasaran/personalities/personalities-api-deployment"
 SECRET_FILE="/etc/personalities/secret.properties"
 
-PID=$(pgrep -f "$JAR_NAME" || true)
+PID=$(pgrep -u jenkins -f "$JAR_NAME" || true)
 if [ -n "$PID" ]; then # -n = non-vide
 	kill -15 "$PID"
 else
