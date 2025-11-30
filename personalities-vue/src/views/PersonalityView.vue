@@ -182,7 +182,12 @@ const displayOffers = (job) => {
                         <strong >{{ t('personality.accessibility_offerJob') }}</strong>
                     </div>
 
-                    <div class="text-center mb-1" v-for="job in mbtiType.professions" @click="displayOffers(job)" id="pointer">{{ job }}</div>
+                    <div class="job-card" 
+                        v-for="job in mbtiType.professions" 
+                        @click="displayOffers(job)" 
+                        >
+                        {{ job }}
+                    </div>
                 </div>
 
                 <div class="offersJob col-12 col-md-6 fs-6 fs-md-5" >
@@ -217,11 +222,6 @@ const displayOffers = (job) => {
 
                 </div>
             </div>
-
-            <!-- <div>
-                <hr>
-                <div><p>specific</p>{{ specificJobs }}</div>
-            </div> -->
 
         </div>
     </div>
@@ -301,14 +301,7 @@ h3{
 .no-bullet{
     list-style: none;
 }
-#pointer{
-    cursor: pointer;
-}
-#pointer:hover{
-    font-weight:800;
-    background-color: #0077b6;
-    color: #effcfe;
-}
+
 .page_indicator{
     color: #effcfe;
     background-color: #0077b6;
@@ -321,5 +314,21 @@ h3{
   background: #f6f2fa;                    
   padding: .5rem;
 }
+.job-card{
+  background: white;
+  padding: 12px 16px;
+  margin: 8px 0;
+  border-radius: 10px;
+  border: 1px solid #cfe9f5;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  cursor: pointer;
+  transition: 0.2s ease;
+  font-weight: 500;
+}
 
+.job-card:hover {
+  background: #0077b6;
+  color: white;
+  transform: translateY(-2px);
+}
 </style>

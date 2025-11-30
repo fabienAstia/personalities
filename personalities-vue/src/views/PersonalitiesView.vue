@@ -65,6 +65,7 @@ const {t} = useI18n();
 .img-fluid{
     width: 100%;
     min-width: 60px;
+    max-width: 200px;
     object-fit: contain;
 }
 .title{

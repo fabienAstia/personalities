@@ -30,8 +30,8 @@ function untruncate(){
 </script>
 
 <template>
-    <article class="mb-1" role="article">
-        <div><b>{{ offerJob.title }}</b> - {{ offerJob.contractType }}</div> 
+    <article class="offer-card" role="article">
+        <div class="text-center"><b>{{ offerJob.title }}</b> - {{ offerJob.contractType }}</div> 
         <div>{{ offerJob.companyName }}</div> 
         <div>{{ address }}</div>
         <div>{{ offerJob.workingHours }} </div>
@@ -58,5 +58,17 @@ function untruncate(){
 .inline{
     display:flex;
 }
+.offer-card {
+    word-wrap: break-word;       /* Ancien standard */
+    overflow-wrap: break-word;   /* Standard moderne */
+    white-space: normal;  
+    background: white;
+    padding: 5px 5px;
+    border: 1px solid #cfe9f5;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);       
+    margin-top: 1rem;
+}
+    
 </style>
 
