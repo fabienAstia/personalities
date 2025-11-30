@@ -12,6 +12,7 @@ if [ -n "$PID" ]; then # -n = non-vide
 else
 	echo "no matching process found"
 fi
+
 rm -rf "$DEPLOY_DIR/$JAR_NAME"
 mkdir -p "$DEPLOY_DIR"
 cd "$DEPLOY_DIR"
