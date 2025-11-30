@@ -21,7 +21,6 @@ if [ -f "$DEPLOY_DIR/app.log" ]; then
     mv "$DEPLOY_DIR/app.log" "$DEPLOY_DIR/personalities-$(date +'%Y%m%d-%H%M%S').log"
 fi
 
-export BUILD_ID=dontKillMe
 cd "$DEPLOY_DIR"
 
-nohup java -jar "$DEPLOY_DIR/$JAR_NAME" --spring.profiles.active=prod --spring.config.additional-location="$SECRET_FILE" >> "$DEPLOY_DIR/app.log" 2>&1 &
+BUILD_ID=dontKillMe nohup java -jar "$DEPLOY_DIR/$JAR_NAME" --spring.profiles.active=prod --spring.config.additional-location="$SECRET_FILE" >> "$DEPLOY_DIR/app.log" 2>&1 &
