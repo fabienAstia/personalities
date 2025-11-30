@@ -22,4 +22,4 @@ if [ -f "$DEPLOY_DIR/app.log" ]; then
     mv "$DEPLOY_DIR/app.log" "$DEPLOY_DIR/personalities-$(date +'%Y%m%d-%H%M%S').log"
 fi
 
-systemctl restart personalities
+sudo /usr/bin/systemctl restart personalities
