@@ -57,7 +57,6 @@ public class ReverseGeocodingService {
     }
 
     public GeoapifyJobResponse createBatchJob(List<CoordinatesView> allCoordinates) {
-//        List<CoordinatesView> filledMissingCoordinates = fillMissingCoordinates(allCoordinates);
         return restClient.post()
                 .uri("https://api.geoapify.com/v1/batch/geocode/reverse?" +
                         "&apiKey=" + token)

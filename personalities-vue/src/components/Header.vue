@@ -43,22 +43,16 @@ const clearLocalStorage = () => {
         <div class="collapse navbar-collapse  fs-md-6 fs-lg-5 " id="navbarNavDropdown">
           <ul class="navbar-nav me-auto gap-1">
             <li class="nav-item hover">
-              <router-link to="/answers" class=" nav-link d-flex gap-1 justify-content-start fw-bold" :aria-label="$t('accessibility_header.test')">
-                <img :src="clipBoard" width="20px">
-                {{t('header.test')}}
-              </router-link>
-            </li>
-            <li class="nav-item hover">
               <router-link to="/personalities" class="nav-link d-flex gap-1 justify-content-start fw-bold" :aria-label="$t('accessibility_header.personalities')">
                 <img :src="filePerson" width="20px">
                 {{t('header.personalities')}}
               </router-link>
             </li>
             <li class="nav-item hover">
-              <a class="nav-link d-flex gap-1 justify-content-start fw-bold" href="#" :aria-label="$t('accessibility_header.documentation')">
-                <img :src="book" width="20px">
-                {{t('header.documentation')}}
-              </a>
+              <router-link to="/answers" class=" nav-link d-flex gap-1 justify-content-start fw-bold" :aria-label="$t('accessibility_header.test')">
+                <img :src="clipBoard" width="20px">
+                {{t('header.test')}}
+              </router-link>
             </li>
           </ul>
         
