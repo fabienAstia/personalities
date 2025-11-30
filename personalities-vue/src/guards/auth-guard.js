@@ -1,44 +1,46 @@
 import { jwtDecode } from 'jwt-decode';
 import i18n from '@/locales';
+import { formatAlert } from '@/composables/useMessageFormatter';
 
 const t = i18n.global.t;
 
-export function adminRole(to, from, next){
+export function adminRole(to, from){
     const token = localStorage.getItem('jwt');
     if(!token){
-        return next('/');
+        return '/';
     }
     try {
         const decodedToken = jwtDecode(token);
         if(decodedToken.role === 'ROLE_ADMIN'){
-            next();
+            return true;
         } else {
-            next('/')
+            return '/'
         }
     } catch(error) {
-        next('/');
+        return '/';
     }
 }
 
-export function userRole(to, from, next){
+export function userRole(to, from){
     let token = localStorage.getItem('jwt');
     if(!token){
-        alert(t('guard.no_token'))
-        return next('/');
+        // alert(t('guard.no_token'))
+        formatAlert(t('guard.no_token'))
+        return '/';
     }
     try {
         const decodedToken = jwtDecode(token);
         const current_time = Math.floor(Date.now() / 1000);
         if(current_time >= decodedToken.exp) {
             alert(t('guard.expired_token'))
-            return next('/')
+            return '/';
         }
         if(decodedToken.role === 'ROLE_USER' || decodedToken.role === 'ROLE_ADMIN'){
-            return next();
+            return true;
         } 
-        return next('/');
+        return '/';
     } catch(error) {
-        return next('/');
+        return '/';
     }
 }
 
