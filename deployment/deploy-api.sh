@@ -8,7 +8,7 @@ SECRET_FILE="/etc/personalities/secret.properties"
 
 PID=$(pgrep -f "$JAR_NAME" || true)
 if [ -n "$PID" ]; then # -n = non-vide
-	kill -15 "$PID" 2>/dev/null || echo "Could not kill process, continuing"
+	kill -15 "$PID"
 else
 	echo "no matching process found"
 fi
@@ -21,6 +21,7 @@ if [ -f "$DEPLOY_DIR/app.log" ]; then
     mv "$DEPLOY_DIR/app.log" "$DEPLOY_DIR/personalities-$(date +'%Y%m%d-%H%M%S').log"
 fi
 
-cd "$DEPLOY_DIR"
-
-BUILD_ID=dontKillMe nohup java -jar "$DEPLOY_DIR/$JAR_NAME" --spring.profiles.active=prod --spring.config.additional-location="$SECRET_FILE" >> "$DEPLOY_DIR/app.log" 2>&1 &
+BUILD_ID=dontKillMe nohup java -jar "$DEPLOY_DIR/$JAR_NAME" \
+--spring.profiles.active=prod \
+--spring.config.additional-location="$SECRET_FILE" \
+>> "$DEPLOY_DIR/app.log" 2>&1 &
