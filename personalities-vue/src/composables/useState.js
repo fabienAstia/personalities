@@ -2,6 +2,7 @@ import {ref} from 'vue';
 import { jwtDecode } from 'jwt-decode';
 
 const sharedState = ref('');
+export const sharedAlert = ref('');
 
 export function useSharedState(){
     const token = localStorage.getItem('jwt');
@@ -19,4 +20,12 @@ export function useSharedState(){
         }
     }
     return sharedState;
+}
+
+export function setShareAlert(alert){
+    sharedAlert.value = alert;
+}
+
+export function getShareAlert(){
+    return sharedAlert;
 }

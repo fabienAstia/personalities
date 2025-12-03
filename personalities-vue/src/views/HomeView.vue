@@ -1,8 +1,11 @@
 <script setup>
 import arrowCircle from '@/assets/pictos/arrowCircle.svg';
 import home_background from '@/assets/images/home_img.png';
-import { onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted, useTemplateRef, ref , watch} from 'vue'
 import { useI18n } from 'vue-i18n';
+import Alert from '@/components/Alert.vue';
+import { sharedAlert, setShareAlert } from '@/composables/useState';
+import { formatAlert } from '@/composables/useMessageFormatter';
 
 const {t} = useI18n();
 
@@ -15,8 +18,17 @@ onMounted(() => {
 onUnmounted(() =>{
     document.body.removeAttribute('style');
 })
-</script>
 
+const modal = useTemplateRef('modal')
+watch(() => sharedAlert.value, (newVal, oldVal)=>{
+    if(newVal == t('guard.no_token')){
+        modal.value.openModal()
+        modal.value.alertTxt = formatAlert(newVal).message   
+        setShareAlert("") 
+    }
+})
+
+</script>
 
 <template>
     <div class="home-centered container">
@@ -32,16 +44,19 @@ onUnmounted(() =>{
             </p>
 
             <div class=" d-flex justify-content-center">
-                <router-link to="/answers" class="btn btn-success">
-                    <span class="d-flex gap-2 fs-5">
-                        {{t('home.take_the_test')}}
-                        <img :src="arrowCircle">
-                    </span>
+                <router-link 
+                    to="/answers" 
+                    class="btn btn-success">
+                        <span class="d-flex gap-2 fs-5">
+                            {{t('home.take_the_test')}}
+                            <img :src="arrowCircle">
+                        </span>
                 </router-link>
             </div>
 
         </div>
     </div>
+    <Alert ref="modal"/>
 </template>
 
 <style scoped> 

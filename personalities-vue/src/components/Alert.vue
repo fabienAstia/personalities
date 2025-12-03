@@ -27,7 +27,7 @@ defineExpose({
     <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
-            <h1 class="modal-title fs-5" id="modalLabel">Alert</h1>
+            <h1 class="modal-title fs-5" id="modalLabel"><span class="square">⚠️</span><b> Alert</b></h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -48,11 +48,19 @@ defineExpose({
         z-index: 1350;
     }
     .alert{
-        color: #f50000;
+        color: #e66a6a;
         font-weight: 700;
         font-size: larger;
         text-align: center;
         padding: 0;
         margin: 0;
+    }
+    #modalLabel{
+        display: flex;
+        align-items: center;
+    }
+    .square{
+        width: 2rem;
+        height: 2rem;
     }
 </style>
