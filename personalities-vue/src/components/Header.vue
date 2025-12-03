@@ -2,10 +2,13 @@
 import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
 import { useRouter } from 'vue-router';
-import {useSharedState} from '@/composables/useState'
+import { useSharedState} from '@/composables/useState'
+import { formatAlert } from '@/composables/useMessageFormatter';
+import {watch, useTemplateRef } from 'vue';
+import { sharedAlert, setShareAlert } from '@/composables/useState';
+import AlertModal from '@/components/Alert.vue'
 import clipBoard from '@/assets/pictos/clipBoard.svg';
 import filePerson from '@/assets/pictos/filePerson.svg';
-import book from '@/assets/pictos/book.svg';
 import personAdd from '@/assets/pictos/personAdd.svg';
 import personCheck from '@/assets/pictos/personCheck.svg';
 import personGear from '@/assets/pictos/personGear.svg';
@@ -28,6 +31,15 @@ const clearLocalStorage = () => {
   sharedState.value = '';
   route.push("/")
 }
+
+const myModal = useTemplateRef('modal')
+watch(()=> sharedAlert.value, (newVal, oldVal) => {
+    if(newVal == t('guard.no_token')){
+        myModal.value.openModal()
+        myModal.value.alertTxt = formatAlert(newVal).message   
+        setShareAlert("") 
+    }
+})
 </script>
 
 <template>
@@ -49,9 +61,12 @@ const clearLocalStorage = () => {
               </router-link>
             </li>
             <li class="nav-item hover">
-              <router-link to="/answers" class=" nav-link d-flex gap-1 justify-content-start fw-bold" :aria-label="$t('accessibility_header.test')">
-                <img :src="clipBoard" width="20px">
-                {{t('header.test')}}
+              <router-link 
+                to="/answers" 
+                class=" nav-link d-flex gap-1 justify-content-start fw-bold" 
+                :aria-label="$t('accessibility_header.test')">
+                  <img :src="clipBoard" width="20px">
+                  {{t('header.test')}}
               </router-link>
             </li>
           </ul>
@@ -131,6 +146,7 @@ const clearLocalStorage = () => {
         </div>
       </div>
     </nav>
+    <AlertModal ref="modal"/>
 </template>
   
   <style scoped>

@@ -3,9 +3,6 @@ import arrowCircle from '@/assets/pictos/arrowCircle.svg';
 import home_background from '@/assets/images/home_img.png';
 import { onMounted, onUnmounted, useTemplateRef, ref , watch} from 'vue'
 import { useI18n } from 'vue-i18n';
-import Alert from '@/components/Alert.vue';
-import { sharedAlert, setShareAlert } from '@/composables/useState';
-import { formatAlert } from '@/composables/useMessageFormatter';
 
 const {t} = useI18n();
 
@@ -17,15 +14,6 @@ onMounted(() => {
 })
 onUnmounted(() =>{
     document.body.removeAttribute('style');
-})
-
-const modal = useTemplateRef('modal')
-watch(() => sharedAlert.value, (newVal, oldVal)=>{
-    if(newVal == t('guard.no_token')){
-        modal.value.openModal()
-        modal.value.alertTxt = formatAlert(newVal).message   
-        setShareAlert("") 
-    }
 })
 
 </script>
@@ -56,7 +44,6 @@ watch(() => sharedAlert.value, (newVal, oldVal)=>{
 
         </div>
     </div>
-    <Alert ref="modal"/>
 </template>
 
 <style scoped> 

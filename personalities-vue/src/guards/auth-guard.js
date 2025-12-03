@@ -8,14 +8,14 @@ export function adminRole(to, from){
     const token = localStorage.getItem('jwt');
     if(!token){
         setShareAlert(t('guard.no_token'))
-        return '/';
+        return false;
     }
     try {
         const decodedToken = jwtDecode(token);
         if(decodedToken.role === 'ROLE_ADMIN'){
             return true;
         } else {
-            return '/'
+            return false;
         }
     } catch(error) {
         return '/';
@@ -26,19 +26,19 @@ export function userRole(to, from){
     let token = localStorage.getItem('jwt');
     if(!token){
         setShareAlert(t('guard.no_token'))
-        return '/';
+        return false;
     }
     try {
         const decodedToken = jwtDecode(token);
         const current_time = Math.floor(Date.now() / 1000);
         if(current_time >= decodedToken.exp) {
             setShareAlert(t('guard.expired_token'))
-            return '/';
+            return false;
         }
         if(decodedToken.role === 'ROLE_USER' || decodedToken.role === 'ROLE_ADMIN'){
             return true;
         } 
-        return '/';
+        return false;
     } catch(error) {
         return '/';
     }
