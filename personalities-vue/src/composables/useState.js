@@ -1,7 +1,7 @@
 import {ref} from 'vue';
 import { jwtDecode } from 'jwt-decode';
 
-const sharedState = ref('');
+export const sharedState = ref('');
 export const sharedAlert = ref('');
 
 export function useSharedState(){
@@ -21,11 +21,11 @@ export function useSharedState(){
     }
     return sharedState;
 }
+export function setShareState(state){
+    sharedState.value = state;
+}
 
 export function setShareAlert(alert){
     sharedAlert.value = alert;
 }
 
-export function getShareAlert(){
-    return sharedAlert;
-}

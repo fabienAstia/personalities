@@ -1,23 +1,21 @@
 <script setup>
 import {ref, useTemplateRef} from 'vue';
 import { useI18n } from 'vue-i18n';
+import { setShareState} from '@/composables/useState'
+import { jwtDecode } from 'jwt-decode';
+import { formatAlert } from '@/composables/useMessageFormatter';
+import { globalModal } from '@/composables/useGlobalModal';
 import router from '@/router';
 import eye from '@/assets/pictos/eye.svg';
 import eyeSlash from '@/assets/pictos/eyeSlash.svg';
-import {useSharedState} from '@/composables/useState'
-import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
-import { formatAlert } from '@/composables/useMessageFormatter';
-import AlertModal from '@/components/Alert.vue'
 
 const{t} = useI18n();
-const sharedState = useSharedState();
 const apiUrl = import.meta.env.VITE_API_URL
 
-const modal = useTemplateRef('modal')
 const showMessage = (msg) => {
-    modal.value.openModal()
-    modal.value.alertTxt = formatAlert(msg).message
+    globalModal.value.openModal()
+    globalModal.value.alertTxt = formatAlert(msg).message
 }
 
 const userCredentials = ref({username:'', password:''});
@@ -37,9 +35,10 @@ const authenticate = async() => {
   try{
     const response = await axios.post(`${apiUrl}/users/authenticate`, userCredentials.value);
       let jwt = response.data;
+      console.log('jwt', jwt)
       localStorage.setItem('jwt', jwt); 
       showMessage(t('success.login'))
-      sharedState.value = 'logged';
+      setShareState('logged')
       const decodedToken = jwtDecode(jwt);
       if(decodedToken.role === 'ROLE_ADMIN'){
         await router.push(`questions`);
@@ -57,7 +56,6 @@ const authenticate = async() => {
 
 
 <template>
-  <AlertModal ref="modal"/>
   <div class="container-md">
     <h3 class="text-center">{{t('login.title')}}</h3>
     <form @submit.prevent="authenticate" class="bg-light fs-5">

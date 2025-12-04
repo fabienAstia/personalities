@@ -1,7 +1,7 @@
 <script setup>
 import arrowCircle from '@/assets/pictos/arrowCircle.svg';
 import home_background from '@/assets/images/home_img.png';
-import { onMounted, onUnmounted, useTemplateRef, ref , watch} from 'vue'
+import { onMounted, onUnmounted} from 'vue'
 import { useI18n } from 'vue-i18n';
 
 const {t} = useI18n();

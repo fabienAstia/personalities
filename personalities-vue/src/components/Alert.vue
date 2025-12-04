@@ -3,7 +3,7 @@ import {ref, onMounted, defineExpose} from 'vue'
 import { Modal } from 'bootstrap'
 
 let myModal = null
-const alertTxt = ref({})
+const alertTxt = ref('')
 
 onMounted(()=>{
    myModal = new Modal('#modal')

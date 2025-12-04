@@ -13,6 +13,7 @@ export function adminRole(to, from){
     try {
         const decodedToken = jwtDecode(token);
         if(decodedToken.role === 'ROLE_ADMIN'){
+            setShareAlert("")
             return true;
         } else {
             return false;
@@ -23,7 +24,7 @@ export function adminRole(to, from){
 }
 
 export function userRole(to, from){
-    let token = localStorage.getItem('jwt');
+    const token = localStorage.getItem('jwt');
     if(!token){
         setShareAlert(t('guard.no_token'))
         return false;

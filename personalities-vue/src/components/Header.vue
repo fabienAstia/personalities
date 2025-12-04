@@ -2,11 +2,11 @@
 import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
 import { useRouter } from 'vue-router';
-import { useSharedState} from '@/composables/useState'
+import { sharedState} from '@/composables/useState'
 import { formatAlert } from '@/composables/useMessageFormatter';
+import { globalModal } from '@/composables/useGlobalModal';
 import {watch, useTemplateRef } from 'vue';
 import { sharedAlert, setShareAlert } from '@/composables/useState';
-import AlertModal from '@/components/Alert.vue'
 import clipBoard from '@/assets/pictos/clipBoard.svg';
 import filePerson from '@/assets/pictos/filePerson.svg';
 import personAdd from '@/assets/pictos/personAdd.svg';
@@ -20,7 +20,6 @@ import poFlag from '@/assets/images/Flag_of_Portugal.svg.png';
 
 const { t, locale } = useI18n();
 const route = useRouter();
-const sharedState = useSharedState();
 
 const changeLanguage = (lang) => {
   locale.value = lang;
@@ -32,11 +31,11 @@ const clearLocalStorage = () => {
   route.push("/")
 }
 
-const myModal = useTemplateRef('modal')
 watch(()=> sharedAlert.value, (newVal, oldVal) => {
-    if(newVal == t('guard.no_token')){
-        myModal.value.openModal()
-        myModal.value.alertTxt = formatAlert(newVal).message   
+    if(newVal === t('guard.no_token') || newVal === t('guard.expired_token')){
+        console.log('formatAlert(newVal).message =', formatAlert(newVal).message  )
+        globalModal.value.openModal()
+        globalModal.value.alertTxt = formatAlert(newVal).message   
         setShareAlert("") 
     }
 })
@@ -146,7 +145,6 @@ watch(()=> sharedAlert.value, (newVal, oldVal) => {
         </div>
       </div>
     </nav>
-    <AlertModal ref="modal"/>
 </template>
   
   <style scoped>

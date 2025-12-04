@@ -2,7 +2,16 @@
 import Header from '@/components/Header.vue';
 import Footer from '@/components/Footer.vue';
 import { useRoute } from 'vue-router'
+import { useTemplateRef } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { globalModal } from './composables/useGlobalModal';
+import {ref} from 'vue'
+
+import Alert from '@/components/Alert.vue'
+
+const {t} = useI18n();
 const route = useRoute()
+
 </script>
 
 <template>
@@ -15,7 +24,7 @@ const route = useRoute()
     </div> 
     <Footer/>
   </div>
-
+  <Alert ref="globalModal"/>
 </template>
 
 <style scoped>
